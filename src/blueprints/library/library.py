@@ -1,5 +1,11 @@
 from flask import Blueprint, render_template, redirect, url_for, request
-from src.consume_api.consume_api_library import get_works, post_work, put_work
+from src.consume_api.consume_api_library import (
+    get_works,
+    post_work,
+    put_work,
+    delete_work,
+)
+from src.helper.helper import helper_convert
 
 # from flask_cors import cross_origin
 
@@ -11,7 +17,7 @@ library_blueprint = Blueprint(
 @library_blueprint.route("/", methods=["GET"])
 # @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
 def index():
-    works = get_works()
+    works = helper_convert(get_works())
     return render_template("index.html", works=works)
 
 
@@ -24,7 +30,7 @@ def create():
         "authors": request.form["insert-authors"].split(", "),
     }
     post_work(work)
-    works = get_works()
+    works = helper_convert(get_works())
     return redirect(url_for("library.index", works=works))
 
 
@@ -37,5 +43,12 @@ def update():
         "authors": request.form["update-authors"].split(", "),
     }
     put_work(request.form["id"], work)
-    works = get_works()
+    works = helper_convert(get_works())
+    return redirect(url_for("library.index", works=works))
+
+
+@library_blueprint.route("/remove/<id>", methods=["GET"])
+def remove(id: str):
+    delete_work(id)
+    works = helper_convert(get_works())
     return redirect(url_for("library.index", works=works))
