@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="text-align: center; width: 2020px; height: 0px;">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-primary" id="color-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Add Task
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Work</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+            <form action="/create" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="message-text" name="description" placeholder="Enter a new task...">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Task</button>
+                </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+
+
+<div class="container mt-5 px-2" style="text-align: center; width: 1300px;">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr class="bg-light">
+                    <th scope="col" width="20%">Title</th>
+                    <th scope="col" width="15%">Publishing Company</th>
+                    <th scope="col" width="30%">Authors</th>
+                    <th scope="col" width="20%">Photo</th>
+                    <th scope="col" width="4%">Edit</th>
+                    <th scope="col" width="2%">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for work in works %}
+                    <tr>
+                        <td>{{ work.title }}</td>
+                        <td>{{ work.publishing_company }}</td>
+                        <td>{{ work.authors }}</td>
+                        <td> <img src="{{ work.photo }}"></td>
+                        <td><a href="#" data-bs-toggle="modal" data-bs-target="#modaldit{{ work.id }}"><img src="https://img.icons8.com/stickers/30/000000/edit-property.png"/></a></td>
+                        <td><a href="/remove/{{ work.id }}"><img src="https://img.icons8.com/stickers/30/000000/filled-trash.png"/></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
