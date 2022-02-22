@@ -21,11 +21,24 @@
         <div class="mb-3">
             <form action="/create" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="message-text" name="description" placeholder="Enter a new task...">
+                    <label for="message-text" class="form-label">Title:</label>
+                    <input type="text" class="form-control" id="insert-title" name="insert-title" placeholder="Ex: Harry Potter e a Pedra Filosofal">
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="form-label">Publishing Company:</label>
+                    <input type="text" class="form-control" id="insert-publishing_company" name="insert-publishing_company" placeholder="Ex: Rocco">
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="form-label">Authors:</label>
+                    <input type="text" class="form-control" id="insert-authors" name="insert-authors" placeholder="Ex: JK Rowling, ...">
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="form-label">Photo:</label>
+                    <input type="text" class="form-control" id="insert-photo" name="insert-photo" placeholder="Ex: https://i.imgur.com/UH3IPXw.jpg">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Task</button>
+                    <button for="message-text" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Work</button>
                 </div>
             </form>
           </div>
