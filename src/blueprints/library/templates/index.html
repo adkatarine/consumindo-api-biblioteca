@@ -69,9 +69,43 @@
                         <td>{{ work.publishing_company }}</td>
                         <td>{{ work.authors }}</td>
                         <td> <img src="{{ work.photo }}"></td>
-                        <td><a href="#" data-bs-toggle="modal" data-bs-target="#modaldit{{ work.id }}"><img src="https://img.icons8.com/stickers/30/000000/edit-property.png"/></a></td>
+                        <td><a href="#" data-bs-toggle="modal" data-bs-target="#modalEdit{{ work.id }}"><img src="https://img.icons8.com/stickers/30/000000/edit-property.png"/></a></td>
                         <td><a href="/remove/{{ work.id }}"><img src="https://img.icons8.com/stickers/30/000000/filled-trash.png"/></a></td>
                     </tr>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalEdit{{ work.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Edit Task</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="mb-3">
+                                <form action="/update" method="post">
+                                    <div class="form-group">
+                                        <input type="hidden"name="id" value="{{ work.id }}">
+                                        <label for="message-text" class="form-label">Title:</label>
+                                        <input type="text" class="form-control" id="update-title" name="update-title" value="{{work.title}}">
+                                        <label for="message-text" class="form-label">Publishing Company:</label>
+                                        <input type="text" class="form-control" id="update-publishing_company" name="update-publishing_company" value="{{work.publishing_company}}">
+                                        <label for="message-text" class="form-label">Authors:</label>
+                                        <input type="text" class="form-control" id="update-authors" name="update-authors" value="{{work.authors}}">
+                                        <label for="message-text" class="form-label">Photo:</label>
+                                        <input type="text" class="form-control" id="update-photo" name="update-photo" value="{{work.photo}}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal -->
                 {% endfor %}
             </tbody>
         </table>

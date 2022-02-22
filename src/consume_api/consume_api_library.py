@@ -7,5 +7,9 @@ def get_works():
     return json.loads(request.content)
 
 
-def post_work(work):
+def post_work(work: dict):
     requests.post("http://127.0.0.1:8000/obras", data=json.dumps(work))
+
+
+def put_work(id: str, work: dict):
+    requests.put(f"http://127.0.0.1:8000/obras/{id}", data=json.dumps(work))
