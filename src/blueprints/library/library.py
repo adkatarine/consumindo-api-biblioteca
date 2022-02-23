@@ -5,9 +5,7 @@ from src.consume_api.consume_api_library import (
     put_work,
     delete_work,
 )
-from src.helper.helper import helper_convert
-
-# from flask_cors import cross_origin
+from src.helper.helper import helper_adjust_authors
 
 library_blueprint = Blueprint(
     "library", __name__, template_folder="templates", static_folder="static"
@@ -15,10 +13,9 @@ library_blueprint = Blueprint(
 
 
 @library_blueprint.route("/", methods=["GET"])
-# @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
 def index():
-    works = helper_convert(get_works())
-    return render_template("index.html", works=works)
+    works = helper_adjust_authors(get_works())
+    return render_template("index.html", works=works, error=False)
 
 
 @library_blueprint.route("/create", methods=["POST"])
@@ -29,9 +26,9 @@ def create():
         "photo": request.form["insert-photo"],
         "authors": request.form["insert-authors"].split(", "),
     }
-    post_work(work)
-    works = helper_convert(get_works())
-    return redirect(url_for("library.index", works=works))
+    error = post_work(work)
+    works = helper_adjust_authors(get_works())
+    return redirect(url_for("library.index", works=works, error=error))
 
 
 @library_blueprint.route("/update", methods=["POST"])
@@ -42,13 +39,13 @@ def update():
         "photo": request.form["update-photo"],
         "authors": request.form["update-authors"].split(", "),
     }
-    put_work(request.form["id"], work)
-    works = helper_convert(get_works())
-    return redirect(url_for("library.index", works=works))
+    error = put_work(request.form["id"], work)
+    works = helper_adjust_authors(get_works())
+    return redirect(url_for("library.index", works=works, error=error))
 
 
 @library_blueprint.route("/remove/<id>", methods=["GET"])
 def remove(id: str):
-    delete_work(id)
-    works = helper_convert(get_works())
-    return redirect(url_for("library.index", works=works))
+    error = delete_work(id)
+    works = helper_adjust_authors(get_works())
+    return redirect(url_for("library.index", works=works, error=error))

@@ -2,7 +2,12 @@
 
 {% block content %}
 
-<div style="text-align: center; width: 2020px; height: 0px;">
+{% if error == 'True' %}
+    <div class="alert alert-danger" role="alert">
+      Ocorreu um erro, tente novamente!
+    </div>
+{% endif %}
+<div style="text-align: center; width: 2220px; height: 0px;">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-outline-primary" id="color-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Add Task
@@ -49,15 +54,15 @@
 <!-- Modal -->
 
 
-<div class="container mt-5 px-2" style="text-align: center; width: 1300px;">
+<div class="container mt-5 px-2" style=" width: 1000px;">
     <div class="table-responsive">
-        <table class="table">
+        <table class="table" style="text-align: center;">
             <thead>
                 <tr class="bg-light">
-                    <th scope="col" width="20%">Title</th>
-                    <th scope="col" width="15%">Publishing Company</th>
-                    <th scope="col" width="30%">Authors</th>
-                    <th scope="col" width="20%">Photo</th>
+                    <th scope="col" width="30%">Title</th>
+                    <th scope="col" width="20%">Publishing Company</th>
+                    <th scope="col" width="15%">Authors</th>
+                    <th scope="col" width="15%">Photo</th>
                     <th scope="col" width="4%">Edit</th>
                     <th scope="col" width="2%">Remove</th>
                 </tr>
@@ -68,7 +73,7 @@
                         <td>{{ work.title }}</td>
                         <td>{{ work.publishing_company }}</td>
                         <td>{{ work.authors }}</td>
-                        <td> <img src="{{ work.photo }}"></td>
+                        <td> <a href="{{ work.photo }}" target="_blank">{{ work.photo }}</a></td>
                         <td><a href="#" data-bs-toggle="modal" data-bs-target="#modalEdit{{ work.id }}"><img src="https://img.icons8.com/stickers/30/000000/edit-property.png"/></a></td>
                         <td><a href="/remove/{{ work.id }}"><img src="https://img.icons8.com/stickers/30/000000/filled-trash.png"/></a></td>
                     </tr>
