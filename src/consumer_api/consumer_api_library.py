@@ -1,4 +1,4 @@
-""" Classe contendo as solicitações HTTP para a API de obras da biblioteca.
+""" Arquivo contendo as solicitações HTTP para a API de obras da biblioteca.
 
 """
 from src.helper.verify_status_code import (

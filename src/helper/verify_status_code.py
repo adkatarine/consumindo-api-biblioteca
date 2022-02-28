@@ -10,9 +10,7 @@ def verify_status_code_between_400(request) -> bool:
     :param request: resposta de uma solicitação HTTP.
     :return: bool
     """
-    if 400 <= request.status_code < 500:
-        return False
-    return True
+    return not 400 <= request.status_code < 500
 
 
 def verify_status_code_between_200(request) -> bool:
@@ -21,6 +19,4 @@ def verify_status_code_between_200(request) -> bool:
     :param request: resposta de uma solicitação HTTP.
     :return: bool
     """
-    if request.status_code == requests.codes.ok:
-        return True
-    return False
+    return request.status_code == requests.codes.ok

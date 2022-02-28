@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request
-from src.consume_api.consume_api_library import (
+from src.consumer_api.consumer_api_library import (
     get_works,
     post_work,
     put_work,
